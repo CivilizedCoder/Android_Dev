@@ -1,0 +1,1184 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --accent-color: #f39c12;
+    --bg-color: #f4f7f6;
+    --card-bg-color: #ffffff;
+    --text-color: #333;
+    --muted-text-color: #7f8c8d;
+    --border-color: #e0e0e0;
+    --danger-color: #e74c3c;
+    --success-color: #27ae60;
+    --remembered-input-color: #888; /* Color for remembered inputs */
+
+    --font-family: 'Poppins', sans-serif;
+    --border-radius: 8px;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    --input-padding: 0.8rem 1.2rem;
+    --nav-height: 60px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.7;
+    overscroll-behavior-y: contain;
+}
+
+/* --- Login & Register Views --- */
+#LoginView, #RegisterView {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-container {
+    max-width: 400px;
+    width: 100%;
+    padding: 30px;
+    background-color: var(--card-bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+#loginForm .input-group, #registerForm .input-group {
+    margin-bottom: 25px;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Navigation --- */
+.main-nav {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0 20px;
+    height: var(--nav-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    position: relative; /* For positioning the mobile menu */
+}
+
+.nav-logo {
+    font-size: 1.6rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+.nav-logo i {
+    margin-right: 10px;
+    color: var(--accent-color);
+}
+
+/* Container for the right side of the nav (links + user status) */
+.nav-links-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Provides space between the UL and the user-status div */
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav .nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    margin: 0 5px;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+.nav-link i {
+    margin-right: 8px;
+}
+
+.main-nav .nav-link:hover,
+.main-nav .nav-link.active-link {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.user-status {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+#userEmailDisplay {
+    font-size: 0.9em;
+    font-weight: 500;
+    opacity: 0.9;
+}
+#signOutBtn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.hamburger {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+
+/* --- Main Content Area --- */
+.content-area {
+    flex-grow: 1;
+    padding: 25px;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.view-section {
+    display: none;
+    background-color: var(--card-bg-color);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.view-section.active-view {
+    display: block;
+}
+
+
+/* For the app container itself */
+.app-container.active-view {
+    display: flex !important;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.view-header {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+.view-header h1 {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+}
+.view-header h1 i {
+    margin-right: 12px;
+    color: var(--accent-color);
+}
+
+
+/* --- Form Styling & Data Management Sections --- */
+#roomForm .form-section,
+#filterForm.form-section, /* Added for filter form */
+.data-management-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: #fdfdfd;
+}
+.data-management-section:last-child {
+    margin-bottom: 0;
+}
+
+
+#roomForm .form-section h2,
+#filterForm.form-section h2, /* Added for filter form */
+.data-management-section h2 {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 500;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+#roomForm .form-section h2 i,
+#filterForm.form-section h2 i, /* Added for filter form */
+.data-management-section h2 i {
+    margin-right: 10px;
+    color: var(--secondary-color);
+}
+.data-management-section h2 i.fa-file-export,
+.data-management-section h2 i.fa-exchange-alt {
+    color: var(--primary-color); /* Differentiate some data management icons */
+}
+
+
+.input-group {
+    margin-bottom: 20px;
+    position: relative; /* For potential absolute positioned elements inside */
+}
+.input-group fieldset.input-group { /* Nested fieldsets */
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+fieldset.sub-group {
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: var(--border-radius);
+}
+fieldset.sub-group legend {
+    padding: 0 5px;
+    font-weight: 500;
+    color: var(--muted-text-color);
+}
+
+
+.input-group label, .group-label, fieldset legend {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--muted-text-color);
+}
+.checkbox-group .group-label, .radio-group .group-label { /* Specific for checkbox/radio group legends */
+    margin-bottom: 10px;
+}
+
+
+.input-group small {
+    display: block;
+    font-size: 0.85em;
+    color: var(--muted-text-color);
+    margin-top: 5px;
+}
+.input-group textarea { /* Specific textarea styling within input-group */
+    margin-top: 8px; /* Add some space above textareas */
+    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem;
+}
+
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+select,
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: var(--input-padding);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: var(--font-family);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, font-style 0.3s ease;
+    background-color: #fff;
+    color: var(--text-color); /* Default text color */
+}
+input[type="file"] {
+    padding: 0.6rem 0.8rem; /* Slightly less padding for file inputs */
+}
+input[type="number"].fixture-count-input,
+input[type="number"].light-fixture-quantity { /* Specific styling for quantity inputs */
+    width: 80px; /* Narrower width for quantity */
+    padding: 0.6rem 0.8rem;
+    margin-left: 5px;
+    text-align: center;
+}
+
+textarea {
+    line-height: 1.5;
+    min-height: 60px; /* Minimum height for textareas */
+}
+#jsonPasteArea, #jsonDisplayArea { /* Specific textareas for JSON */
+    min-height: 100px;
+}
+
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus,
+input[type="file"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+    color: var(--text-color); /* Ensure text color is normal on focus */
+    font-style: normal; /* Ensure font style is normal on focus */
+}
+
+/* Styling for remembered and default inputs */
+.remembered-input, .default-value-input {
+    color: var(--remembered-input-color) !important;
+    font-style: italic !important;
+}
+
+/* Ensure select dropdown text itself isn't styled by remembered-input directly, but the select box shows it */
+select.remembered-input option {
+    color: var(--text-color); /* Options should always be normal color */
+    font-style: normal;
+}
+
+
+.radio-group label,
+.checkbox-group label {
+    display: inline-flex; /* Align checkbox/radio with text */
+    align-items: center;
+    margin-right: 15px; /* Space between options */
+    margin-bottom: 10px; /* Space below options */
+    font-weight: 400;
+    cursor: pointer;
+    position: relative;
+}
+
+.radio-group input[type="radio"],
+.checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: var(--primary-color); /* Modern way to color radios/checkboxes */
+    transform: scale(1.1);
+    cursor: pointer;
+    flex-shrink: 0; /* Prevent shrinking if label text is long */
+}
+
+
+.conditional-section { /* For sections like dropCeilingOptions, floorTileOptions */
+    padding: 15px;
+    margin-top: 15px;
+    border-left: 3px solid var(--secondary-color);
+    display: none; /* Initially hidden, shown by JS */
+    background-color: #f9f9f9;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.conditional-other { /* For "Other" text inputs */
+    margin-top: 8px;
+    display: none; /* Initially hidden */
+}
+.light-fixture-other-specify { /* Specific for light fixture "other" text inputs */
+    margin-top: 8px;
+    display: none;
+}
+
+
+.inline-other { /* For "Other" text inputs that appear next to a checkbox */
+    margin-left: 10px;
+    width: auto; /* Adjust width as needed */
+    padding: 0.4rem 0.6rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    display: none; /* Initially hidden */
+}
+.other-field-wrapper { /* Container for a checkbox and its inline "other" input */
+    display: inline-flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    vertical-align: middle; /* Align with other form elements */
+}
+.other-field-wrapper label { /* Label within this wrapper */
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+
+.door-entry, .light-fixture-entry { /* Styling for dynamically added door/light fixture sections */
+    padding: 15px;
+    border: 1px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
+    background-color: #fdfdfd;
+    position: relative; /* For absolute positioning of remove button */
+}
+.door-entry h4, .light-fixture-entry h4 {
+    margin-top:0;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+.light-fixture-entry .input-group {
+    margin-bottom: 10px; /* Reduced margin for tighter layout */
+}
+.light-fixture-entry .input-group label {
+    font-size: 0.9rem;
+}
+
+
+.remove-door-btn, .remove-light-fixture-btn { /* Remove buttons for dynamic entries */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    line-height: 1; /* Ensure icon fits well */
+}
+.remove-door-btn:hover, .remove-light-fixture-btn:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.8rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease, box-shadow 0.2s ease;
+    margin-top: 10px; /* Default top margin */
+    margin-right: 10px; /* Default right margin for spacing */
+    text-decoration: none;
+}
+.action-button i {
+    margin-right: 8px;
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.action-button:active {
+    transform: translateY(-1px);
+}
+
+.primary-button {
+    background-color: var(--primary-color);
+    color: white;
+}
+.primary-button:hover {
+    background-color: #2980b9; /* Darker primary on hover */
+}
+
+.secondary-button {
+    background-color: var(--secondary-color);
+    color: white;
+}
+.secondary-button:hover {
+    background-color: #27ae60; /* Darker secondary on hover */
+}
+
+.warning-button {
+    background-color: var(--accent-color);
+    color: white;
+}
+.warning-button:hover {
+    background-color: #d68910; /* Darker accent on hover */
+}
+
+
+.danger-button {
+    background-color: var(--danger-color);
+    color: white;
+}
+.danger-button:hover {
+    background-color: #c0392b; /* Darker danger on hover */
+}
+
+
+.feedback {
+    margin-top: 20px;
+    padding: 12px 18px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+.feedback:empty { /* Hide if no text */
+    display: none;
+}
+.feedback.success {
+    display: block; /* Ensure it's visible when class is added */
+    background-color: #d4efdf;
+    color: var(--success-color);
+    border: 1px solid #a9dfbf;
+}
+.feedback.error {
+    display: block; /* Ensure it's visible */
+    background-color: #fdedec;
+    color: var(--danger-color);
+    border: 1px solid #f5b7b1;
+}
+.feedback.info { /* For informational messages */
+    display: block;
+    background-color: #eaf2f8;
+    color: var(--primary-color);
+    border: 1px solid #aed6f1;
+}
+
+
+/* --- View Rooms Styling & Filter Results Styling --- */
+#roomListContainer, #filterResultsContainer {
+    margin-top: 20px;
+}
+
+.building-group {
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--card-bg-color); /* Ensures background for the group */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.building-header {
+    background-color: var(--primary-color); /* Header for building group */
+    color: white;
+    padding: 12px 18px;
+    cursor: pointer;
+    border-radius: var(--border-radius) var(--border-radius) 0 0; /* Rounded top corners */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+.building-header:hover {
+    background-color: #2980b9; /* Darker on hover */
+}
+.building-header .toggle-icon {
+    transition: transform 0.3s ease;
+    font-size: 0.9em;
+}
+.building-header.expanded .toggle-icon {
+    transform: rotate(90deg); /* Icon rotation for expanded state */
+}
+
+.rooms-in-building-container {
+    padding: 0px 15px; /* Initial padding, adjusted when expanded */
+    display: grid; /* Use grid for room cards */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive columns */
+    gap: 15px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Smooth expansion */
+}
+.building-header.expanded + .rooms-in-building-container {
+    max-height: 2000px; /* Large enough max-height for content */
+    padding: 15px;
+    overflow-y: auto; /* Scroll if content overflows */
+}
+/* For Filter Results - direct grid layout */
+#filterResultsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+
+.empty-list-message {
+    text-align: center;
+    color: var(--muted-text-color);
+    font-size: 1.1rem;
+    padding: 30px;
+    width:100%; /* Full width */
+    grid-column: 1 / -1; /* Make it span all columns if in a grid */
+}
+
+.room-card {
+    background-color: #fff; /* White background for cards */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+.room-card:hover, .room-card:focus-within {
+    transform: translateY(-3px); /* Slight lift on hover/focus */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.09);
+}
+
+
+.room-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    font-size: 1.1rem; /* Slightly smaller for card context */
+    font-weight: 600;
+}
+.room-card p {
+    color: var(--muted-text-color);
+    font-size: 0.85rem; /* Smaller text for details */
+    margin-bottom: 12px;
+    flex-grow: 1; /* Allow p to take available space */
+}
+.room-card .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px; /* Space between action buttons */
+    margin-top: auto;
+    flex-wrap: wrap;
+}
+.room-card .actions .action-button {
+    font-size: 0.8rem; /* Smaller buttons in cards */
+    padding: 0.45rem 0.9rem;
+    margin-top: 5px;
+}
+
+
+/* Modal for Room Details */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    animation: fadeInModal 0.3s;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+.modal-content {
+    background-color: var(--card-bg-color);
+    margin: 8% auto;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    max-width: 700px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    animation: slideInModal 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes slideInModal {
+    from { transform: translateY(-50px) scale(0.95); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.close-modal-btn {
+    color: var(--muted-text-color);
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.close-modal-btn:hover,
+.close-modal-btn:focus {
+    color: var(--danger-color);
+    text-decoration: none;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+#roomDetailContent {
+    max-height: 65vh;
+    overflow-y: auto;
+    padding-right: 15px; /* Space for scrollbar */
+}
+#roomDetailContent h2 { /* Title inside modal */
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+#roomDetailContent h3 { /* Section titles inside modal */
+    color: var(--secondary-color);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+#roomDetailContent p {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+#roomDetailContent p.condition-comment { /* Comments for condition values */
+    font-style: italic;
+    color: var(--muted-text-color);
+    font-size: 0.9rem;
+    padding-left: 15px;
+    margin-top: -5px; /* Pull up slightly */
+    margin-bottom: 10px;
+}
+
+#roomDetailContent strong {
+    color: var(--text-color);
+    font-weight: 500;
+}
+#roomDetailContent ul {
+    list-style: disc;
+    margin-left: 25px;
+    margin-bottom: 10px;
+}
+#roomDetailContent ul li {
+    margin-bottom: 5px;
+}
+
+
+/* --- Data Management View Specific --- */
+.data-management-description {
+    margin-bottom: 20px;
+    font-size: 1.0rem;
+    color: var(--muted-text-color);
+}
+.import-method-container {
+    margin-bottom: 25px;
+}
+.data-sub-heading {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+.data-sub-heading i {
+    margin-right: 8px;
+    color: var(--accent-color);
+}
+.data-section-divider {
+    margin: 30px 0;
+    border: 0;
+    border-top: 1px solid var(--border-color);
+}
+
+#jsonDisplayArea { /* For exporting JSON */
+    width: 100%;
+    min-height: 200px;
+    max-height: 400px; /* Limit height to prevent excessive scrolling */
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    white-space: pre;
+    overflow: auto;
+    margin-bottom: 20px;
+    background-color: #fdfdfd;
+}
+#jsonPasteArea { /* For pasting JSON to import */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+}
+
+.export-buttons-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+}
+
+/* --- Building Name Suggestions (if implemented) --- */
+.suggestions-list {
+    border: 1px solid var(--border-color);
+    border-top: none;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    background-color: white;
+    width: 100%; /* Match input width */
+    left:0; /* Align with input */
+    top: 100%; /* Position below input */
+    z-index: 999;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.suggestions-list div {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+.suggestions-list div:hover {
+    background-color: var(--bg-color);
+}
+.suggestions-list:empty {
+    display: none;
+}
+
+
+/* --- Other Fixtures Styling --- */
+.other-fixtures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 15px;
+}
+.fixture-item-group {
+    display: flex; /* Align checkbox, label, and count input */
+    align-items: center;
+    margin-bottom: 5px; /* Small gap between items */
+    flex-wrap: nowrap; /* Prevent wrapping within the group */
+}
+.fixture-item-group label.fixture-checkbox-label {
+    display: flex; /* Align checkbox with its text */
+    align-items: center;
+    margin-right: 5px; /* Space between checkbox and count input */
+    flex-grow: 1; /* Allow label to take available space */
+    margin-bottom: 0; /* Override default label margin */
+}
+
+.fixture-item-group input[type="checkbox"].fixture-present-checkbox {
+    margin-right: 8px; /* Space after checkbox */
+}
+.fixture-item-group input[type="number"].fixture-count-input {
+    width: 70px; /* Smaller width for quantity */
+    padding: 0.4rem 0.6rem;
+    font-size: 0.9rem;
+    margin-left: auto; /* Push to the right if space allows */
+}
+.fixture-item-group-other { /* Special layout for "Other Fixture" group */
+    grid-column: 1 / -1; /* Span full width */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start;
+}
+.fixture-item-group-other .other-details-container {
+    display: none; /* Initially hidden, shown by JS */
+    flex-direction: column; /* Stack specify text and quantity */
+    width: 100%;
+    margin-top: 5px;
+    padding-left: 25px; /* Indent "Other" details */
+}
+.fixture-item-group-other .other-details-container input[type="text"],
+.fixture-item-group-other .other-details-container input[type="number"] {
+    width: 100%; /* Full width within its container */
+    margin-left: 0; /* Reset margin */
+    margin-bottom: 5px;
+}
+.fixture-item-group-other .other-details-container input[type="number"] {
+    width: 100px; /* Specific width for quantity in "Other" */
+}
+
+
+/* --- Conflict Modal Specific Styling (Import & Duplicate Save) --- */
+.conflict-room-comparison, .conflict-resolution-container {
+    display: flex;
+    gap: 20px; /* Space between importing and existing room panels */
+    margin-bottom: 20px;
+}
+.conflict-panel, .conflict-room-panel { /* Combined for reuse */
+    flex: 1; /* Equal width for both panels */
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+}
+.conflict-panel h3, .conflict-room-panel h4 { /* Combined for reuse */
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    font-size: 1.05rem;
+}
+.conflict-panel h3 i, .conflict-room-panel h4 i { /* Combined for reuse */
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+.conflict-room-panel:last-child h4 i,
+#existingDataPanel h3 i { /* Different icon color for existing room */
+     color: var(--secondary-color);
+}
+
+.room-details-preview {
+    font-size: 0.85rem;
+    max-height: 150px; /* Adjust as needed */
+    overflow-y: auto;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    flex-grow: 1; /* Allow preview to take space */
+    margin-bottom: 10px;
+}
+.room-details-preview p {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+.room-details-preview strong {
+    font-weight: 500;
+}
+
+#conflictModal .input-group, #duplicateResolutionView .input-group { /* Apply to both */
+    margin-bottom: 15px;
+}
+#conflictModal .action-button, #duplicateResolutionView .action-button { /* Apply to both */
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+}
+#modifyConflictFeedback:empty, #duplicateResolutionFeedback:empty { /* Apply to both */
+    display:none;
+}
+
+/* Accessibility Helper */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    white-space: nowrap;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 960px) {
+    .hamburger {
+        display: block; /* Show hamburger button */
+    }
+
+    /* Hide the nav container by default on mobile */
+    .nav-links-container {
+        display: none;
+        position: absolute;
+        top: 100%; /* Position below the main nav bar */
+        left: 0;
+        width: 100%;
+        background-color: #2980b9; /* A bit darker for the dropdown */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        flex-direction: column; /* Stack items vertically */
+        padding: 10px 0;
+        gap: 0; /* Reset gap for vertical layout */
+    }
+
+    /* Show the container when menu is open */
+    .nav-links-container.active {
+        display: flex;
+    }
+    
+    .nav-links-container ul {
+        flex-direction: column;
+        width: 100%;
+        /* align-items: flex-start; <= This was removed to allow links to stretch full-width */
+    }
+
+    .nav-links-container .user-status {
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px 20px;
+        margin-top: 10px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav-links-container .nav-link {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 12px 20px;
+        margin: 0;
+        border-radius: 0;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+    .content-area {
+        padding: 15px;
+    }
+    .view-header h1 {
+        font-size: 1.5rem;
+    }
+    #roomForm .form-section h2,
+    #filterForm.form-section h2,
+    .data-management-section h2 {
+        font-size: 1.15rem;
+    }
+    .modal-content {
+        margin: 5% auto;
+        width: 95%;
+        padding: 20px;
+    }
+    .action-button { /* General action button adjustments */
+        margin-bottom: 10px;
+    }
+    #roomForm .action-button,
+    #filterForm .action-button, /* Added for filter form */
+    #roomForm #cancelEditBtn,
+    #roomForm #copyCurrentRoomJsonBtn { /* Buttons in main forms take full width */
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .export-buttons-wrapper .action-button,
+    .data-management-section .action-button,
+    #conflictModal .action-button,
+    #duplicateResolutionView .actions .action-button, /* Buttons in duplicate resolution panels */
+    #duplicateResolutionView > div > .action-button { /* Back to Room List button */
+        width: auto; /* Allow them to size based on content */
+        flex-grow: 1;
+        margin-right: 10px; /* Keep some spacing */
+    }
+
+    .data-management-section .action-button:last-child,
+    #conflictModal .action-button:last-child,
+    #duplicateResolutionView .actions .action-button:last-child,
+    #duplicateResolutionView > div > .action-button:last-of-type {
+        margin-right: 0; /* No margin for the last button in a row */
+    }
+
+
+    .data-management-section .input-group input[type="file"],
+    .data-management-section .input-group textarea,
+    .data-management-section .input-group select { /* Ensure inputs in data management are full width */
+        width: 100%;
+    }
+
+     .checkbox-group label, .radio-group label, .other-field-wrapper {
+        display: block; /* Stack checkbox/radio groups */
+        width: 100%;
+        margin-right: 0;
+    }
+    .inline-other {
+        width: calc(100% - 0px); /* Make inline-other full width when stacked */
+        margin-left: 0;
+        margin-top: 8px;
+    }
+    .other-field-wrapper .inline-other {
+        margin-left: 0;
+    }
+    
+    .conflict-room-comparison, .conflict-resolution-container {
+        flex-direction: column; /* Stack conflict panels */
+    }
+    .conflict-panel .actions, .conflict-room-panel .actions { /* Actions within conflict panels */
+        display: flex;
+        flex-direction: column; /* Stack buttons */
+    }
+    .conflict-panel .actions .action-button, .conflict-room-panel .actions .action-button {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+     .conflict-panel .actions .action-button:last-child, .conflict-room-panel .actions .action-button:last-child {
+        margin-bottom: 0;
+    }
+
+
+    .other-fixtures-grid { /* Single column for fixtures grid */
+        grid-template-columns: 1fr;
+    }
+    .light-fixture-entry .input-group {
+        display: flex;
+        flex-direction: column; /* Stack elements within light fixture entry */
+    }
+    .light-fixture-entry .input-group label {
+        margin-bottom: 5px;
+    }
+    .light-fixture-entry input[type="number"].light-fixture-quantity,
+    .light-fixture-entry select,
+    .light-fixture-entry input[type="text"] {
+        width: 100%; /* Full width for light fixture inputs */
+        margin-left: 0;
+    }
+    .rooms-in-building-container, #filterResultsContainer { /* Adjust grid for room cards */
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    .room-card .actions .action-button {
+        flex-basis: calc(50% - 4px); /* Two buttons per row in card actions */
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-logo {
+        font-size: 1.3rem;
+    }
+    .view-header h1 {
+        font-size: 1.3rem;
+    }
+     #roomForm .form-section h2,
+     #filterForm.form-section h2,
+     .data-management-section h2 {
+        font-size: 1.1rem;
+    }
+    .export-buttons-wrapper .action-button,
+    .data-management-section .action-button,
+    #filterForm .action-button, /* Added for filter form */
+    #conflictModal .action-button,
+    #duplicateResolutionView .actions .action-button,
+    #duplicateResolutionView > div > .action-button { /* All these buttons become full width */
+        width: 100%;
+        margin-right: 0;
+    }
+    .conflict-actions .action-button {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+    .building-header {
+        font-size: 0.95rem;
+        padding: 10px 15px;
+    }
+    .rooms-in-building-container, #filterResultsContainer {
+        grid-template-columns: 1fr; /* Single column for room cards */
+    }
+     .room-card .actions .action-button {
+        flex-basis: 100%; /* Single button per row in card actions */
+    }
+}
+
+.data-management-section .import-method-container + .data-section-divider + .import-method-container {
+    margin-top: 0; /* Adjust margin for stacked import methods */
+}
+
+#buildingManagementFeedback:empty, #filterFeedback:empty { /* Added filterFeedback */
+    display: none;
+}
+
+.data-management-section h2 i.fa-building-user {
+    color: var(--secondary-color); /* Specific icon color */
+}
+
+/* Ensure filter form buttons have some space */
+#filterForm .action-button + .action-button {
+    margin-left: 10px;
+}
+@media (max-width: 768px) {
+    #filterForm .action-button + .action-button {
+        margin-left: 0;
+        margin-top: 10px; /* Stack them on smaller screens */
+    }
+}
